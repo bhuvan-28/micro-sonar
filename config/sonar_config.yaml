@@ -1,0 +1,63 @@
+# ============================================================
+# Micro-Sonar Global Configuration
+# ============================================================
+
+audio:
+  sample_rate: 48000          # Hz - standard for mobile hardware
+  channels: 1                 # Mono
+  dtype: float32
+  block_size: 2048            # Samples per audio callback block
+
+chirp:
+  f_start: 10000              # Hz - near-ultrasonic start frequency
+  f_end: 22000                # Hz - near-ultrasonic end frequency
+  duration: 0.1               # seconds - chirp sweep duration
+  amplitude: 0.85             # peak amplitude (0.0 - 1.0), leave headroom
+  window: hanning              # Window function applied to chirp envelope
+  mode: logarithmic           # 'linear' or 'logarithmic' frequency sweep
+
+recording:
+  record_duration: 0.5        # seconds - how long to record echo after chirp
+  pre_delay: 0.05             # seconds - silence before chirp emission (loopback sync)
+  silence_threshold: 0.001   # RMS below which a frame is considered silent
+
+dsp:
+  fft_size: 4096              # FFT window size
+  hop_length: 512             # Hop length for STFT
+  n_mels: 128                 # Mel filterbank bins
+  fmin: 17000                 # Mel filterbank min frequency
+  fmax: 23000                 # Mel filterbank max frequency
+  peak_min_distance: 100      # Minimum sample distance between IR peaks
+
+simulation:
+  n_rooms: 5000               # Number of synthetic rooms to generate
+  image_source_order: 3       # Pyroomacoustics reflection order
+  noise_snr_range: [15, 40]  # SNR range (dB) for added ambient noise
+  materials:
+    - concrete
+    - drywall
+    - wood
+    - carpet
+    - glass
+
+  room_dimensions:
+    width:  [2.5, 10.0]       # meters
+    length: [2.5, 12.0]       # meters
+    height: [2.4,  4.0]       # meters
+
+training:
+  batch_size: 64
+  epochs: 100
+  learning_rate: 0.001
+  validation_split: 0.15
+  test_split: 0.10
+  checkpoint_dir: checkpoints/
+  patience: 15                 # Early stopping patience
+
+model:
+  backbone: mobilenet_v3_small  # 'mobilenet_v3_small' | 'custom_cnn'
+  input_shape: [1, 128, 128]    # [C, H, W] mel-spectrogram
+  num_material_classes: 5
+  dim_loss_weight: 1.0          # Weight for dimension regression loss
+  material_loss_weight: 0.5     # Weight for material classification loss
+

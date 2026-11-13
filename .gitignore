@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# C++ build artifacts
+build/
+bin/
+obj/
+*.o
+*.obj
+*.dll
+*.dylib
+*.exe
+
+# Android Studio & Gradle
+.gradle/
+build/
+android/.gradle/
+android/build/
+android/app/build/
+*.apk
+*.aab
+local.properties
+.cxx/
+*.iml
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Datasets and large generated binaries
+data/*.npz
+data/test_dataset.npz
+data/dataset_2000.npz
+data/dataset_5000.npz
+data/dataset_full.npz
+
+# Model weights and checkpoints
+checkpoints/*.pt
+*.tflite_saved_model/
+
+# Recorded audio files & diagnostics
+*.wav
+loopback_recording.wav
+*.png
+!chirp_analysis.png
+
+# System logs
+*.log
+
